@@ -1,19 +1,24 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-    console.log("DOM fully loaded and parsed");
-});
+// Executar chamadas ajax
+function callRestGet(verobo, url, callback, errorCallback) {
 
-function InjetarIziToast(){
-  // Injeta framework de notificações "iziToast"
-  var scriptIziToast = document.createElement("script");
-  scriptIziToast.setAttribute('src', 'https://loyaltycog.mybluemix.net/js/iziToast.min.js');
-  // Append
-  document.head.appendChild(scriptIziToast);
-
-  var cssIziToast = document.createElement("link");
-  cssIziToast.setAttribute("rel", "stylesheet");
-  cssIziToast.setAttribute("type", "text/css");
-  cssIziToast.setAttribute("href", "https://loyaltycog.mybluemix.net/css/iziToast.min.css");
-  cssIziToast.getElementsByTagName("head")[0].appendChild(cssIziToast);
+  var searchUrl = 'https://loyaltycog.mybluemix.net/teste' +
+  '?url=' + encodeURIComponent(searchTerm);
+  var x = new XMLHttpRequest();
+  x.open('GET', searchUrl);
+  // The API responds with JSON, so let Chrome parse it.
+  x.responseType = 'json';
+  x.onload = function() {
+    // Parse and process the response
+    var response = x.response;
+    if (!response) {
+      errorCallback('Sem resposta de LoyaltyCog!');
+      return;
+    }
+    var firstResult = response.isPartner;
+    callback(firstResult);
+  };
+  x.onerror = function() {
+    errorCallback('Network error.');
+  };
+  x.send();
 }
-
-InjetarIziToast();
