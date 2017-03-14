@@ -51,7 +51,14 @@ var settings = module.exports = {
 
     functionGlobalContext: { },
 
-    storageModule: require("./couchstorage")
+    storageModule: require("./couchstorage"),
+
+    httpNodeCors: {
+      "origin": "*",
+      "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+      "preflightContinue": true,
+      "optionsSuccessStatus": 204
+    }
 }
 
 if (process.env.NODE_RED_USERNAME && process.env.NODE_RED_PASSWORD) {
