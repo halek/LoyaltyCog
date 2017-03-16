@@ -1,25 +1,52 @@
-<!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
-<html charset="utf-8">
-  <head>
-    <title>Getting Started Extension's Popup</title>
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
-    <link href="css/iziToast.min.css" rel="stylesheet">
-    <script src="js/popup.js"></script>
-    <script src="js/prototype.js"></script>
-    <script src="js/iziToast.min.js"></script>
+<!DOCTYPE html>
+<html lang="pt">
+  <head charset="utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>LoyaltyCog</title>
 
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/theme.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="js/popup.js"></script>
   </head>
-  <body>
-    <div id="generalContainer" class="target-example" />
+  <body style="width:780px; height:580px">
+
+    <!-- <div id="generalContainer" class="target-example">H<div> -->
+    <div class="panel panel-primary panel-modest">
+      <div class="panel-heading">
+        <h3 class="panel-title">Teste bootstrap</h3>
+      </div>
+      <div class="panel-body">
+        Testando o layout
+      </div>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

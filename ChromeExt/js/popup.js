@@ -94,6 +94,7 @@ function renderStatus(statusText) {
 
 document.addEventListener('DOMContentLoaded', function() {
 
+return;
   //document.getElementById('generalContainer').src = 'https://loyaltycog.mybluemix.net/ola';
   //return;
 
