@@ -57,8 +57,8 @@ function getCurrentTabUrl(callback) {
 function getImageUrl(searchTerm, callback, errorCallback) {
   // Google image search - 100 searches per day.
   // https://developers.google.com/image-search/
-  var searchUrl = 'https://loyaltycog.mybluemix.net/teste' +
-    '?url=' + encodeURIComponent(searchTerm);
+  var searchUrl = 'https://ajax.googleapis.com/ajax/services/search/images' +
+    '?v=1.0&q=' + encodeURIComponent(searchTerm);
   var x = new XMLHttpRequest();
   x.open('GET', searchUrl);
   // The Google image search API responds with JSON, so let Chrome parse it.
@@ -66,20 +66,21 @@ function getImageUrl(searchTerm, callback, errorCallback) {
   x.onload = function() {
     // Parse and process the response from Google Image Search.
     var response = x.response;
-    if (!response) {
-      errorCallback('Sem resposta de LoyaltyCog!');
+    if (!response || !response.responseData || !response.responseData.results ||
+        response.responseData.results.length === 0) {
+      errorCallback('No response from Google Image search!');
       return;
     }
-    var firstResult = response.isPartner;
+    var firstResult = response.responseData.results[0];
     // Take the thumbnail instead of the full image to get an approximately
     // consistent image size.
-    // var imageUrl = firstResult.tbUrl;
-    // var width = parseInt(firstResult.tbWidth);
-    // var height = parseInt(firstResult.tbHeight);
-    // console.assert(
-    //     typeof imageUrl == 'string' && !isNaN(width) && !isNaN(height),
-    //     'Unexpected respose from the Google Image Search API!');
-    callback(firstResult);
+    var imageUrl = firstResult.tbUrl;
+    var width = parseInt(firstResult.tbWidth);
+    var height = parseInt(firstResult.tbHeight);
+    console.assert(
+        typeof imageUrl == 'string' && !isNaN(width) && !isNaN(height),
+        'Unexpected respose from the Google Image Search API!');
+    callback(imageUrl, width, height);
   };
   x.onerror = function() {
     errorCallback('Network error.');
@@ -88,19 +89,52 @@ function getImageUrl(searchTerm, callback, errorCallback) {
 }
 
 function renderStatus(statusText) {
-  document.getElementById('status').textContent = statusText;
+  document.getElementById('generalContainer').innerHTML = statusText;
 }
 
-// document.addEventListener('DOMContentLoaded', function() {
-//   getCurrentTabUrl(function(url) {
-//     // Put the image URL in Google search.
-//     renderStatus('Verificando se é parceiro ' + url);
-//
-//     getImageUrl(url, function(imageUrl) {
-//       renderStatus('Search term: ' + url + '\n' +
-//           'LoyaltyCog resultado: ' + imageUrl);
-//     }, function(errorMessage) {
-//       renderStatus('Error: ' + errorMessage);
-//     });
-//   });
-// });
+document.addEventListener('DOMContentLoaded', function() {
+
+  //document.getElementById('generalContainer').src = 'https://loyaltycog.mybluemix.net/ola';
+  //return;
+
+  iziToast.show({
+            color: 'dark',
+            icon: 'fa-cog',
+            title: 'LoayltyCog',
+            message: 'Olá!',
+            target: '.target-example',
+            position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+            progressBarColor: 'rgb(0, 255, 184)',
+            buttons: [
+                ['<button>Sim</button>', function (instance, toast) {
+                    alert("Sim!");
+                }],
+                ['<button>Fechar</button>', function (instance, toast) {
+                    instance.hide({
+                        transitionOut: 'fadeOutUp',
+                        onClose: function(instance, toast, closedBy){
+                            console.info('closedBy: ' + closedBy); //btn2
+                        }
+                    }, toast, 'close', 'btn2');
+                }]
+            ],
+            onOpen: function(instance, toast){
+                console.info('callback abriu!');
+            },
+            onClose: function(instance, toast, closedBy){
+                console.info('closedBy: ' + closedBy); // tells if it was closed by 'drag' or 'button'
+            }
+        });
+
+        return;
+
+  new Ajax.Request('https://loyaltycog.mybluemix.net/ola', {
+    method:'get',
+    onSuccess: function(transport) {
+      var response = transport.responseText || "no response text";
+      renderStatus(response);
+    },
+    onFailure: function() { renderStatus(response); }
+  });
+
+});
