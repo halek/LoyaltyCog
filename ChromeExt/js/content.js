@@ -22,7 +22,6 @@ function loadScript( url, callback ) {
   document.getElementsByTagName( "head" )[0].appendChild( script );
 }
 
-
 var everythingLoaded = setInterval(function() {
   if (/loaded|complete/.test(document.readyState)) {
     clearInterval(everythingLoaded);
@@ -33,42 +32,3 @@ var everythingLoaded = setInterval(function() {
     });
   }
 }, 10);
-
-/*
-function getCookie(name) {
-    var cookie = document.cookie;
-    var prefix = name + "=";
-    var begin = cookie.indexOf("; " + prefix);
-    if (begin == -1) {
-        begin = cookie.indexOf(prefix);
-        if (begin != 0) return null;
-    } else {
-        begin += 2;
-        var end = document.cookie.indexOf(";", begin);
-        if (end == -1) {
-        end = cookie.length;
-        }
-    }
-    return unescape(cookie.substring(begin + prefix.length, end));
-}
-
-var createCookie = function(name, value, days) {
-    var expires;
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toGMTString();
-    }
-    else {
-        expires = "";
-    }
-    document.cookie = name + "=" + value + expires + "; path=/";
-}
-
-/*var myCookie = getCookie("loyaltycog");
-
-if (myCookie == null) {
-    createCookie("loyaltycog","setup-inicial", 3600)
-} else {
-    alert("cookie exists");
-}*/
