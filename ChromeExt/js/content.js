@@ -26,9 +26,9 @@ var everythingLoaded = setInterval(function() {
   if (/loaded|complete/.test(document.readyState)) {
     clearInterval(everythingLoaded);
     // Load iziModal
-    loadScript("https://loyaltycog.mybluemix.net/js/LoyaltyCog.js", function() {
-        lcReady = true;
+    //loadScript("https://loyaltycog.mybluemix.net/js/LoyaltyCog.js", function() {
+        //lcReady = true;
         //Setup();
-    });
+    //});
   }
 }, 10);

@@ -6,8 +6,18 @@
   "version": "0.0.1",
 
   "browser_action": {
-    "default_icon": "icon.png"
+    "default_icon": "assets/icon_16.png",
+    "default_popup": "popup.html"
   },
+
+  "background": {
+    "scripts": ["js/eventPage.js"],
+    "persistent": false
+  },
+
+  "icons": { "16": "assets/icon_16.png",
+           "48": "assets/icon_48.png",
+          "128": "assets/icon_128.png" },
 
  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
 
@@ -24,6 +34,9 @@
 
   "permissions": [
     "activeTab",
+    "storage",
+    "identity",
+    "identity.email",
     "https://ajax.googleapis.com/",
     "https://loyaltycog.mybluemix.net/"
   ]
