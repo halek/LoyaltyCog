@@ -1,10 +1,8 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-
-  if (document.cookie.indexOf('loyaltycog') > -1 ) {
-    alert("cookie exists");
-  }
-
+  var lcdata = Storage.get('lcdata');
+  console.log(lcdata);
+  setPageContent(lcdata.currentView);
 });
 
 

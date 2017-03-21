@@ -6,12 +6,11 @@
   "version": "0.0.1",
 
   "browser_action": {
-    "default_icon": "assets/icon_16.png",
-    "default_popup": "popup.html"
+    "default_icon": "assets/icon_16.png"
   },
 
   "background": {
-    "scripts": ["js/eventPage.js"],
+    "scripts": ["js/jquery.min.js","js/helpers.js","js/eventPage.js"],
     "persistent": false
   },
 
