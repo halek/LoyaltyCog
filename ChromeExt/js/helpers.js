@@ -33,10 +33,49 @@ var Storage = (function(){
     return {set:setData,get:getData,update:updateDate}
 })();
 
+// Loader dinâmico de scripts
+function loadScript( url, callback ) {
+  var script = document.createElement( "script" )
+  script.type = "text/javascript";
+  if(script.readyState) {  //IE
+    script.onreadystatechange = function() {
+      if ( script.readyState === "loaded" || script.readyState === "complete" ) {
+        script.onreadystatechange = null;
+        callback();
+      }
+    };
+  } else {  //Others
+    script.onload = function() {
+      callback();
+    };
+  }
+
+  script.src = url;
+  document.getElementsByTagName( "head" )[0].appendChild( script );
+}
+
 /**
  * Configura o conteúdo a ser exibido no popup a partir das views
  * @param {string} url caminho da view. Ex. views/login.html
  */
 function setPageContent(url) {
-  $( "#mainContainer" ).load( url );
+
+  // Carregamos o html da view
+  $.get(url)
+    .done(function() {
+      $( "#mainContainer" ).load( url );
+    }).fail(function() {
+      console.error('view não existe!');
+    })
+
+    // verificamos se existe um .js
+    var urlJs = url.replace("html","js");
+    $.get(url)
+      .done(function() {
+        loadScript(urlJs, function() { });
+      }).fail(function() {
+        console.log('view:' + urlJs + ' não possui script associado!');
+      })
+
+  //$( "#mainContainer" ).load( url );
 };
