@@ -18,7 +18,10 @@
     "test": "concurrently \"npm run build:watch\" \"karma start karma.conf.js\"",
     "pretest:once": "npm run build",
     "test:once": "karma start karma.conf.js --single-run",
-    "lint": "tslint ./src/**/*.ts -t verbose"
+    "lint": "tslint ./src/**/*.ts -t verbose",
+    "clean": "rm -rf dist",
+    "build_prod": "npm run build && browserify -s main dist/main.js > dist/bundle.js", //&& npm run minify
+    "minify": "uglifyjs dist/bundle.js --screw-ie8 --compress --mangle --output dist/bundle.min.js"
   },
   "keywords": [],
   "author": "",
