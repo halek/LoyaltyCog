@@ -6,37 +6,21 @@
   "version": "0.0.1",
 
   "browser_action": {
-    "default_icon": "assets/icon_16.png"
+    "default_icon": "src/assets/img/icon_16.png",
+    "default_popup": "src/index.html"
   },
 
-  "background": {
-    "scripts": ["main.js"],
-    "persistent": false
-  },
+  "icons": { "16": "src/assets/img/icon_16.png",
+           "48": "src/assets/img/icon_48.png",
+          "128": "src/assets/img/icon_128.png" },
 
-  "icons": { "16": "assets/icon_16.png",
-           "48": "assets/icon_48.png",
-          "128": "assets/icon_128.png" },
-
- "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
-
- "content_scripts": [
-     {
-     "matches": [
-         "http://*/*",
-         "https://*/*"
-         ],
-     "js": ["js/content.js"],
-     "run_at": "document_end"
-     }
- ],
+ "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
   "permissions": [
     "activeTab",
     "storage",
     "identity",
     "identity.email",
-    "https://ajax.googleapis.com/",
     "https://loyaltycog.mybluemix.net/"
   ]
 
