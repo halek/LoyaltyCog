@@ -1,0 +1,43 @@
+{
+  "manifest_version": 2,
+
+  "name": "LoyaltyCog",
+  "description": "Asistente para o programa LoyaltyCog",
+  "version": "0.0.1",
+
+  "browser_action": {
+    "default_icon": "assets/icon_16.png"
+  },
+
+  "background": {
+    "scripts": ["main.js"],
+    "persistent": false
+  },
+
+  "icons": { "16": "assets/icon_16.png",
+           "48": "assets/icon_48.png",
+          "128": "assets/icon_128.png" },
+
+ "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+
+ "content_scripts": [
+     {
+     "matches": [
+         "http://*/*",
+         "https://*/*"
+         ],
+     "js": ["js/content.js"],
+     "run_at": "document_end"
+     }
+ ],
+
+  "permissions": [
+    "activeTab",
+    "storage",
+    "identity",
+    "identity.email",
+    "https://ajax.googleapis.com/",
+    "https://loyaltycog.mybluemix.net/"
+  ]
+
+}
